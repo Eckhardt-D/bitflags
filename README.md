@@ -53,6 +53,34 @@ featureFlags.setState(15); // 15 (0b1111)
 featureFlags.setState(0); // 0 (0b0000)
 ```
 
+## Example use case
+
+Storing a single integer in a SQL column e.g. users
+
+```typescript
+import { defineMask } from '@eckidevs/bitflags';
+
+const featureFlags = defineMask([
+  "is_admin",
+  "dark_mode",
+  "experimental_mode",
+  "pro_account",
+]);
+
+const query = "SELECT flags FROM users WHERE id = $1";
+const user = await db.query(query, [1]);
+
+featureFlags.setState(user.flags);
+
+// Check
+featureFlags.isFlagActive("dark_mode"); // true
+
+// Update
+featureFlags.setFlag("is_admin");
+const updateQuery = "UPDATE users SET flags = $1 WHERE id = $2";
+await db.query(updateQuery, [featureFlags.getState(), 1]);
+```
+
 ## Contributing
 
 Feel free to open issues, make PRs, and contribute in any way you think is helpful.
