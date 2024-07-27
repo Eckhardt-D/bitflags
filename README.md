@@ -23,14 +23,14 @@ const featureFlags = defineMask([
 featureFlags.listActiveFlags(); // []
 
 // Turn a flag on
-featureFlags.setFlag("dark_mode"); // 2 (0b0010)
+featureFlags.setFlag("dark_mode"); // true
 featureFlags.listActiveFlags(); // ["dark_mode"]
 
 // Get individual flag status
 featureFlags.isFlagActive("dark_mode"); // true
 featureFlags.isFlagActive("is_admin"); // false
 
-featureFlags.setFlag("pro_account"); // 10 (0b1010)
+featureFlags.setFlag("pro_account"); // true
 featureFlags.listActiveFlags(); // ["dark_mode", "pro_account"]
 
 // List all flags as [string, boolean] tuples
@@ -44,7 +44,7 @@ featureFlags.removeFlag("pro_account"); // 0 (0b000)
 
 // Add a new flag
 featureFlags.addFlag("is_moderator"); // 0 (0b0000)
-featureFlags.setFlag("is_moderator"); // 1 (0b1000)
+featureFlags.setFlag("is_moderator"); // true
 
 // Turn all flags on
 featureFlags.setState(15); // 15 (0b1111)
