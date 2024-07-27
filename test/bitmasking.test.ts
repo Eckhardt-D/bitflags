@@ -94,7 +94,7 @@ describe('bitmask', () => {
     const mask = defineMask(['a', 'b', 'c', 'd']);
     mask.removeFlag('b');
     expect(mask.isFlagActive('b')).toBe(false);
-    expect(() => mask.setFlag('b')).toThrow();
+    expect(mask.setFlag('b')).toBe(false);
   });
 
   it('should maintain state of flags after removing a flag', () => {

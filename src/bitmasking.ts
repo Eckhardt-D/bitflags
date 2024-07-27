@@ -7,8 +7,9 @@ export function defineMask(input: Array<string>) {
 
   let _state = 0b0
   const mask: Mask = {}
+  let length = input.length;
 
-  for (let i = 0; i < input.length; i++) {
+  for (let i = 0; i < length; i++) {
     mask[input[i]] = 1 << i
   }
 
@@ -18,26 +19,26 @@ export function defineMask(input: Array<string>) {
     return (bit & _state) !== 0
   }
 
-  function setFlag(key: string): number {
+  function setFlag(key: string): boolean {
     const bit = mask[key]
 
     if (bit === undefined) {
-      throw new Error(`Key ${key} does not exist in mask`)
+      return false
     }
 
     _state |= bit
-    return _state
+    return true
   }
 
-  function clearFlag(key: string): number {
+  function clearFlag(key: string): boolean {
     const bit = mask[key]
 
     if (bit === undefined) {
-      throw new Error(`Key ${key} does not exist in mask`)
+      return false
     }
 
     _state &= ~bit
-    return _state
+    return true
   }
 
   function listActiveFlags(): Array<string> {
@@ -67,11 +68,16 @@ export function defineMask(input: Array<string>) {
   }
 
   function setState(state: number): void {
-    _state = state
+    if (state < 0) {
+      state = 0
+    }
+
+    _state = Math.min(state, Math.pow(2, length) - 1)
   }
 
   function addFlag(key: string) {
-    mask[key] = 1 << Object.keys(mask).length
+    mask[key] = 1 << length
+    length++
   }
 
   function removeFlag(key: string) {
