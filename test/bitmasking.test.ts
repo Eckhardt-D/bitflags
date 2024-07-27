@@ -25,6 +25,7 @@ describe('bitmask', () => {
     const mask = defineMask(['a', 'b', 'c', 'd']);
     mask.setFlag('a');
     expect(mask.isFlagActive('a')).toBe(true);
+    expect(mask.length).toBe(4);
     expect(mask.getState()).toBe(1);
   });
 
@@ -39,6 +40,7 @@ describe('bitmask', () => {
     expect(mask.isFlagActive('b')).toBe(true);
     expect(mask.isFlagActive('c')).toBe(true);
     expect(mask.isFlagActive('d')).toBe(true);
+    expect(mask.length).toBe(4);
   });
 
   it('lists active flags', () => {
@@ -73,11 +75,13 @@ describe('bitmask', () => {
     expect(mask.isFlagActive('b')).toBe(true);
     expect(mask.isFlagActive('c')).toBe(false);
     expect(mask.isFlagActive('d')).toBe(false);
+    expect(mask.length).toBe(4);
   });
 
   it('should add a flag', () => {
     const mask = defineMask(['a', 'b', 'c', 'd']);
     mask.addFlag('e');
+    expect(mask.length).toBe(5);
     expect(mask.isFlagActive('e')).toBe(false);
   });
 
@@ -86,6 +90,7 @@ describe('bitmask', () => {
     mask.setFlag('a');
     mask.setFlag('c');
     mask.addFlag('e');
+    expect(mask.length).toBe(5);
     expect(mask.isFlagActive('a')).toBe(true);
     expect(mask.isFlagActive('c')).toBe(true);
   });
@@ -93,6 +98,7 @@ describe('bitmask', () => {
   it('should remove a flag', () => {
     const mask = defineMask(['a', 'b', 'c', 'd']);
     mask.removeFlag('b');
+    expect(mask.length).toBe(3);
     expect(mask.isFlagActive('b')).toBe(false);
     expect(mask.setFlag('b')).toBe(false);
   });
@@ -103,6 +109,7 @@ describe('bitmask', () => {
     mask.setFlag('d');
     mask.setFlag('c');
     mask.removeFlag('c');
+    expect(mask.length).toBe(3);
     expect(mask.isFlagActive('a')).toBe(true);
     expect(mask.isFlagActive('d')).toBe(true);
     expect(mask.isFlagActive('c')).toBe(false);
@@ -129,6 +136,7 @@ describe('bitmask', () => {
     mask.addFlag('e');
     expect(mask.getState()).toBe(4);
 
+    expect(mask.length).toBe(4);
     expect(mask.isFlagActive('a')).toBe(false);
     expect(mask.isFlagActive('b')).toBe(false);
     expect(mask.isFlagActive('d')).toBe(true);
@@ -148,6 +156,7 @@ describe('bitmask', () => {
         mask.setFlag(flags[i]);
         expect(mask.isFlagActive(flags[i])).toBe(true);
       }
+      expect(mask.length).toBe(31);
       expect(mask.getState()).toBe(2 ** flags.length - 1);
     });
   });
@@ -164,6 +173,7 @@ describe('bitmask', () => {
 
     expect(mask.listAllFlags()).toStrictEqual([['a', true], ['d', true]]);
     expect(mask.getState()).toBe(3);
+    expect(mask.length).toBe(2);
   });
 });
 

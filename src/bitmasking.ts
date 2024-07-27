@@ -83,6 +83,7 @@ export function defineMask(input: Array<string>) {
   function removeFlag(key: string) {
     // Remove the key from the mask
     delete mask[key]
+    length--
 
     // Rebuild the mask keys and state
     let i = 0;
@@ -99,6 +100,9 @@ export function defineMask(input: Array<string>) {
   }
 
   return {
+    get length() {
+      return length
+    },
     isFlagActive,
     setFlag,
     clearFlag,

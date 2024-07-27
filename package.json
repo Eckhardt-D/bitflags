@@ -1,7 +1,7 @@
 {
   "name": "@eckidevs/bitflags",
   "description": "A simple bit masking library for TypeScript, store features in a single integer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "author": {
     "name": "Eckhardt Dreyer",
