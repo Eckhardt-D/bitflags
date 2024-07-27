@@ -1,0 +1,44 @@
+{
+  "name": "@eckidevs/bitflags",
+  "description": "A simple bit masking library for TypeScript, store features in a single integer",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "Eckhardt Dreyer",
+    "email": "eckhardt@dreyer.com.na",
+    "url": "https://eckhardt.dreyer.com.na"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eckhardt-D/bitflags.git"
+  },
+  "homepage": "https://github.com/Eckhardt-D/bitflags#readme",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "test": "bun test",
+    "build": "unbuild",
+    "build:stub": "unbuild --stub"
+  }
+}
